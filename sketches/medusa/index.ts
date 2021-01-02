@@ -25,8 +25,8 @@ const sketch = (settings: ISketchSettings) => (p: p5) => {
   let wh = 0;
 
   if (typeof window !== undefined) {
-    ww = window.innerWidth
-    wh = window.innerHeight
+    ww = window.innerWidth;
+    wh = window.innerHeight;
   }
 
   const Center = {
@@ -58,15 +58,15 @@ const sketch = (settings: ISketchSettings) => (p: p5) => {
     }
 
     for (let i = settings.polygonsNumber; i > 0; i--) {
-      let currentPoints = polypoints(
-        settings.vertices,
-        Center,
-        (i + 1) * settings.gap + settings.phaseOffset * Math.sin((dt * settings.speed) / 50 + i * 0.2),
-        p.radians(
+      let currentPoints = polypoints({
+        vertices: settings.vertices,
+        center: Center,
+        radius: (i + 1) * settings.gap + settings.phaseOffset * Math.sin((dt * settings.speed) / 50 + i * 0.2),
+        angle: p.radians(
           (settings.amplitude + settings.frequency) *
             Math.sin((dt * settings.speed) / 100 + i * 0.2 * settings.frequency)
         )
-      );
+      });
 
       if (settings.showPolygons) {
         p.beginShape();
@@ -75,15 +75,15 @@ const sketch = (settings: ISketchSettings) => (p: p5) => {
       }
 
       if (settings.showLines) {
-        let prevPoints = polypoints(
-          settings.vertices,
-          Center,
-          i * settings.gap + settings.phaseOffset * Math.sin((dt * settings.speed) / 50 + (i - 1) * 0.2),
-          p.radians(
+        let prevPoints = polypoints({
+          vertices: settings.vertices,
+          center: Center,
+          radius: i * settings.gap + settings.phaseOffset * Math.sin((dt * settings.speed) / 50 + (i - 1) * 0.2),
+          angle: p.radians(
             (settings.amplitude + settings.frequency) *
               Math.sin((dt * settings.speed) / 100 + (i - 1) * 0.2 * settings.frequency)
           )
-        );
+          });
 
         currentPoints.map(({ x, y }, i) => {
           p.line(x, y, prevPoints[i].x, prevPoints[i].y);

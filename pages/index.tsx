@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
-import TestSketch from 'sketches/test';
+import TestSketch from 'sketches/check';
 import dynamic from 'next/dynamic';
 import styles from 'globals/input.module.css';
 
 const DynamicP5Sketch = dynamic(() => import('components/P5Sketch'), { ssr: false });
 
-const Sketch = new TestSketch()
+const Sketch = new TestSketch({ defaults: {} })
 
 const Home: React.FunctionComponent = () => {
   const [radius, setRadius] = useState<number>(1);

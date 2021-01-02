@@ -5,13 +5,11 @@ type SketchParams = {
 }
 
 class Sketch {
-  params: {
-    radius: number
-  }
+  params: SketchParams
 
-  constructor() {
+  constructor({ defaults }) {
     this.params = {
-      radius: 1
+      ...defaults
     }
   }
 
