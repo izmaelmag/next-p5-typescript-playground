@@ -59,7 +59,7 @@ class LissajousCurveSketch extends Sketch<SketchParams, TP5SketchFunction> {
     this.p = p;
 
     p.setup = () => {
-      p.createCanvas(window.innerWidth, window.innerHeight);
+      p.createCanvas(480, 480);
       p.background(0);
       p.stroke(255);
       p.frameRate(60);
@@ -67,7 +67,7 @@ class LissajousCurveSketch extends Sketch<SketchParams, TP5SketchFunction> {
 
     p.draw = () => {
       p.background(0);
-      p.translate(window.innerWidth / 2, window.innerHeight / 2);
+      p.translate(480 / 2, 480 / 2);
 
       this.drawLines();
 
