@@ -1,6 +1,6 @@
 import p5 from "p5"
 
-export default class Sketch<SketchParams, RendererType> {
+export default class Sketch<SketchParams, RendererFunction> {
   params: SketchParams
   p: p5
   
@@ -17,5 +17,5 @@ export default class Sketch<SketchParams, RendererType> {
     }
   }
 
-  render: RendererType
+  render: RendererFunction
 }
