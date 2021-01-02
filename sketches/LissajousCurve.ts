@@ -25,6 +25,7 @@ export const defaultParams: SketchParams = {
 class LissajousCurveSketch extends Sketch<SketchParams, TP5SketchFunction> {
   private linesDistance = 10;
   private currentPhase = 0;
+  private canvasSize = 480;
 
   private get curvePoints(): Point[] {
     return lissajousCurve({
@@ -88,10 +89,9 @@ class LissajousCurveSketch extends Sketch<SketchParams, TP5SketchFunction> {
     this.p = p;
 
     p.setup = () => {
-      p.createCanvas(480, 480);
+      p.createCanvas(this.canvasSize, this.canvasSize);
       p.background(0);
       p.stroke(255);
-      p.frameRate(60);
     };
 
     p.draw = () => {
@@ -100,7 +100,7 @@ class LissajousCurveSketch extends Sketch<SketchParams, TP5SketchFunction> {
       this.currentPhase += phaseSpeed/1000
 
       p.background(0);
-      p.translate(480 / 2, 480 / 2);
+      p.translate(this.canvasSize / 2, this.canvasSize / 2);
 
       this.drawCurve(p);
 
