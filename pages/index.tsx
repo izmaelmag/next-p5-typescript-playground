@@ -1,35 +1,17 @@
 import { useCallback, useEffect, useState } from 'react';
-import TestSketch from 'sketches/check';
-import dynamic from 'next/dynamic';
-import styles from 'globals/input.module.css';
+import Sketch, { SketchParams, defaultParams } from 'sketches/LissajousCurve';
+import SketchComponent from 'components/P5Sketch'
 
-const DynamicP5Sketch = dynamic(() => import('components/P5Sketch'), { ssr: false });
-
-const Sketch = new TestSketch({ defaults: {} })
-
-const Home: React.FunctionComponent = () => {
-  const [radius, setRadius] = useState<number>(1);
-
-  const handleRangeChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setRadius(Number(e.currentTarget.value));
-  }, []);
+const Home = () => {
+  const [params, setParams] = useState<SketchParams>(defaultParams);
 
   useEffect(() => {
-    Sketch.setParams({ radius })
-  }, [radius])
+    Sketch.setParams(params)
+  }, [params])
 
   return (
     <div>
-      <DynamicP5Sketch sketch={Sketch.render} />
-
-      <input
-        className={styles.input}
-        type='range'
-        min={1}
-        max={10}
-        value={radius}
-        onChange={handleRangeChange}
-      />
+      <SketchComponent sketch={Sketch.render} />
     </div>
   );
 };

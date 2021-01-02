@@ -21,3 +21,5 @@ declare interface ISettingsItem {
 declare interface ISettingsList {
   [key: string]: ISettingsItem
 }
+
+declare type TP5SketchFunction = (p: p5) => void
