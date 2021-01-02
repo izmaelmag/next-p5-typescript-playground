@@ -1,44 +1,51 @@
 import p5 from 'p5';
 import Sketch from 'globals/Sketch';
+import lissajousCurve from 'utils/lissajousCurve';
+import connectPoints from 'utils/connectPoints';
 
 export type SketchParams = {
-  thickness?: number;
-  radius: {
-    x: number;
-    y: number;
-  };
-  period: {
-    x: number;
-    y: number;
-  };
+  precision?: number;
+  showAxes?: boolean;
+  showCurve?: boolean;
+  showPoint?: boolean;
+  phaseIncrement?: number;
+  radius: Vector2D;
+  period: Vector2D;
 };
 
-export const defaultParams = {
-  thickness: 4,
+export const defaultParams: SketchParams = {
+  precision: 1000,
+  showAxes: true,
+  showCurve: true,
+  showPoint: true,
+  phaseIncrement: 5,
   radius: {
     x: 75,
     y: 75
   },
   period: {
-    x: 1,
-    y: 0.5
+    x: 2,
+    y: 3
   }
 };
 
 class LissajousCurveSketch extends Sketch<SketchParams, TP5SketchFunction> {
   private linesDistance = 20;
+  private phase = 0;
 
-  private get x() {
+  private get x(): number {
     const { p, params } = this;
-    return params.radius.x * Math.sin((p.millis() * params.period.x * Math.PI / 1000));
+    const dt = (p.millis() / 1000) * Math.PI;
+    return params.radius.x * Math.sin(dt * params.period.x + this.phase);
   }
 
-  private get y() {
+  private get y(): number {
     const { p, params } = this;
-    return params.radius.y * Math.cos((p.millis() * params.period.y * Math.PI / 1000));
+    const dt = (p.millis() / 1000) * Math.PI;
+    return params.radius.y * Math.cos(dt * params.period.y + this.phase);
   }
 
-  private drawLines = () => {
+  private drawAxes = () => {
     const { p, params, linesDistance, x, y } = this;
 
     let ycoord = params.radius.y + linesDistance;
@@ -47,13 +54,31 @@ class LissajousCurveSketch extends Sketch<SketchParams, TP5SketchFunction> {
     let yradius = params.radius.y;
 
     p.push();
-      p.line(-xradius - linesDistance, ycoord, xradius, ycoord);
-      p.circle(x, ycoord, 8);
+    p.line(-xradius - linesDistance, ycoord, xradius, ycoord);
+    p.circle(x, ycoord, 8);
 
-      p.line(xcoord, -yradius, xcoord, yradius + linesDistance);
-      p.circle(xcoord, y, 8);
+    p.line(xcoord, -yradius, xcoord, yradius + linesDistance);
+    p.circle(xcoord, y, 8);
     p.pop();
   };
+
+  private drawCurve = () => {
+    this.p.push();
+    this.p.noFill();
+    this.p.stroke(120);
+
+    connectPoints({
+      p: this.p,
+      points: lissajousCurve({
+        precision: this.params.precision,
+        radius: this.params.radius,
+        period: this.params.period,
+        phase: this.phase
+      })
+    });
+
+    this.p.pop();
+  }
 
   render = (p: p5) => {
     this.p = p;
@@ -66,13 +91,18 @@ class LissajousCurveSketch extends Sketch<SketchParams, TP5SketchFunction> {
     };
 
     p.draw = () => {
+      const { phaseIncrement, showCurve, showAxes } = this.params;
+      
+      this.phase += phaseIncrement/1000
+
       p.background(0);
       p.translate(480 / 2, 480 / 2);
 
-      this.drawLines();
+      if (showAxes) this.drawAxes();
+      if (showCurve) this.drawCurve();
 
       p.fill(255);
-      p.circle(this.x, this.y, this.params.thickness);
+      p.circle(this.x, this.y, 4);
     };
   };
 }
