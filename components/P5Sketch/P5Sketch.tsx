@@ -12,6 +12,8 @@ const P5Sketch: React.FunctionComponent<P5SketchProps> = ({ sketch, ...rest }) =
 
   useEffect(() => {
     canvas.current = new p5(sketch, sketchContainerRef.current);
+
+    return canvas.current.remove
   }, [sketch]);
 
   return <div {...rest} ref={sketchContainerRef} className={styles.container} />;
