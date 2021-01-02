@@ -1,8 +1,7 @@
 /**
  * @param {number} precision –
  */
-type curveParams = {
-  precision: number;
+type lissajousCurveParams = {
   phase: number;
   radius: Vector2D;
   period: Vector2D;
@@ -11,19 +10,17 @@ type curveParams = {
 /**
  * Calculates points coordinates of lissajous curve with given parameters
  *
- * @param {curveParams}
+ * @param {lissajousCurveParams}
  */
-const lissajousCurve = ({ radius, period, precision, phase }: curveParams): Point[] => {
+const lissajousCurve = ({ radius, period, phase }: lissajousCurveParams): Point[] => {
   const points = [];
 
-  const longestWaveLength = Math.PI * 2 * Math.max(period.x, period.y);
+  const fullAmplitude = radius.x * 2
 
-  const step = longestWaveLength / precision;
-
-  for (let dt = 0; dt < longestWaveLength; dt += step) {
+  for (let step = 0; step < fullAmplitude ; step += 0.1) {
     points.push({
-      x: radius.x * Math.sin(dt * period.x + phase),
-      y: radius.y * Math.cos(dt * period.y + phase)
+      x: radius.x * Math.sin(step / period.x + phase),
+      y: radius.y * Math.cos(step / period.y + phase)
     });
   }
 
