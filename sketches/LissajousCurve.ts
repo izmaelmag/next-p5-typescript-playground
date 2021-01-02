@@ -1,83 +1,87 @@
 import p5 from 'p5';
 import Sketch from 'globals/Sketch';
 import lissajousCurve from 'utils/lissajousCurve';
-import connectPoints from 'utils/connectPoints';
 
 export type SketchParams = {
-  precision?: number;
-  showAxes?: boolean;
-  showCurve?: boolean;
-  showPoint?: boolean;
-  phaseIncrement?: number;
+  onlyCurve?: boolean;
+  phaseSpeed?: number;
   radius: Vector2D;
   period: Vector2D;
 };
 
 export const defaultParams: SketchParams = {
-  precision: 1000,
-  showAxes: true,
-  showCurve: true,
-  showPoint: true,
-  phaseIncrement: 5,
+  onlyCurve: false,
+  phaseSpeed: 3,
   radius: {
-    x: 75,
-    y: 75
+    x: 100,
+    y: 100
   },
   period: {
-    x: 2,
-    y: 3
+    x: 3,
+    y: 2
   }
 };
 
 class LissajousCurveSketch extends Sketch<SketchParams, TP5SketchFunction> {
-  private linesDistance = 20;
-  private phase = 0;
+  private linesDistance = 10;
+  private currentPhase = 0;
+
+  private get curvePoints(): Point[] {
+    return lissajousCurve({
+      radius: this.params.radius,
+      period: this.params.period,
+      phase:  this.currentPhase
+    })
+  }
+
+  private get dt(): number {
+    return (this.p.millis() / 1000) * Math.PI;
+  }
 
   private get x(): number {
-    const { p, params } = this;
-    const dt = (p.millis() / 1000) * Math.PI;
-    return params.radius.x * Math.sin(dt * params.period.x + this.phase);
+    return this.params.radius.x * Math.sin(this.dt / this.params.period.x + this.currentPhase);
   }
 
   private get y(): number {
-    const { p, params } = this;
-    const dt = (p.millis() / 1000) * Math.PI;
-    return params.radius.y * Math.cos(dt * params.period.y + this.phase);
+    return this.params.radius.y * Math.cos(this.dt / this.params.period.y + this.currentPhase);
   }
 
-  private drawAxes = () => {
-    const { p, params, linesDistance, x, y } = this;
-
-    let ycoord = params.radius.y + linesDistance;
-    let xcoord = -params.radius.x - linesDistance;
-    let xradius = params.radius.x;
-    let yradius = params.radius.y;
+  private drawAxes = (p: p5) => {
+    const ycoord  =  this.params.radius.y + this.linesDistance;
+    const xcoord  = -this.params.radius.x - this.linesDistance;
+    const xradius =  this.params.radius.x;
+    const yradius =  this.params.radius.y;
 
     p.push();
-    p.line(-xradius - linesDistance, ycoord, xradius, ycoord);
-    p.circle(x, ycoord, 8);
+    p.line(-xradius - this.linesDistance, ycoord, xradius, ycoord);
+    p.line(xcoord, -yradius, xcoord, yradius + this.linesDistance);
 
-    p.line(xcoord, -yradius, xcoord, yradius + linesDistance);
-    p.circle(xcoord, y, 8);
+    p.strokeWeight(1)
+    p.line(this.x, this.y, this.x, ycoord);
+    p.line(this.x, this.y, xcoord, this.y);
+    
+    p.circle(this.x, ycoord, 8);
+    p.circle(xcoord, this.y, 8);
     p.pop();
   };
 
-  private drawCurve = () => {
-    this.p.push();
-    this.p.noFill();
-    this.p.stroke(120);
+  private drawCurve = (p: p5) => {
+    p.push();
+    p.noFill();
+    p.stroke(255, 0, 0);
+    p.beginShape();
 
-    connectPoints({
-      p: this.p,
-      points: lissajousCurve({
-        precision: this.params.precision,
-        radius: this.params.radius,
-        period: this.params.period,
-        phase: this.phase
-      })
-    });
+    this.curvePoints.forEach(({x, y}) => {
+      p.vertex(x, y);
+    })
 
-    this.p.pop();
+    p.endShape();
+    p.pop();
+  }
+
+  private drawPoint = (p: p5) => {
+    p.fill(255);
+    p.circle(this.x, this.y, 4);
   }
 
   render = (p: p5) => {
@@ -91,18 +95,19 @@ class LissajousCurveSketch extends Sketch<SketchParams, TP5SketchFunction> {
     };
 
     p.draw = () => {
-      const { phaseIncrement, showCurve, showAxes } = this.params;
+      const { phaseSpeed, onlyCurve } = this.params;
       
-      this.phase += phaseIncrement/1000
+      this.currentPhase += phaseSpeed/1000
 
       p.background(0);
       p.translate(480 / 2, 480 / 2);
 
-      if (showAxes) this.drawAxes();
-      if (showCurve) this.drawCurve();
+      this.drawCurve(p);
 
-      p.fill(255);
-      p.circle(this.x, this.y, 4);
+      if (!onlyCurve) {
+        this.drawAxes(p);
+        this.drawPoint(p);
+      }
     };
   };
 }
