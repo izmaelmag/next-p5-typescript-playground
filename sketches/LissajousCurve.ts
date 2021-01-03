@@ -5,20 +5,17 @@ import lissajousCurve from 'utils/lissajousCurve';
 export type SketchParams = {
   onlyCurve?: boolean;
   phaseSpeed?: number;
-  radius: Vector2D;
+  radius?: number;
   period: Vector2D;
 };
 
 export const defaultParams: SketchParams = {
   onlyCurve: false,
-  phaseSpeed: 3,
-  radius: {
-    x: 100,
-    y: 100
-  },
+  phaseSpeed: 12,
+  radius: 60,
   period: {
-    x: 3,
-    y: 2
+    x: 2,
+    y: 1
   }
 };
 
@@ -40,18 +37,18 @@ class LissajousCurveSketch extends Sketch<SketchParams, TP5SketchFunction> {
   }
 
   private get x(): number {
-    return this.params.radius.x * Math.sin(this.dt / this.params.period.x + this.currentPhase);
+    return this.params.radius * Math.sin(this.dt / this.params.period.x + this.currentPhase);
   }
 
   private get y(): number {
-    return this.params.radius.y * Math.cos(this.dt / this.params.period.y + this.currentPhase);
+    return this.params.radius * Math.cos(this.dt / this.params.period.y + this.currentPhase);
   }
 
   private drawAxes = (p: p5) => {
-    const ycoord  =  this.params.radius.y + this.linesDistance;
-    const xcoord  = -this.params.radius.x - this.linesDistance;
-    const xradius =  this.params.radius.x;
-    const yradius =  this.params.radius.y;
+    const ycoord  =  this.params.radius + this.linesDistance;
+    const xcoord  = -this.params.radius - this.linesDistance;
+    const xradius =  this.params.radius;
+    const yradius =  this.params.radius;
 
     p.push();
     p.line(-xradius - this.linesDistance, ycoord, xradius, ycoord);
