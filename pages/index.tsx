@@ -1,18 +1,19 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Sketch, { SketchParams, defaultParams } from 'sketches/LissajousCurve';
-import SketchComponent from 'components/P5Sketch'
+import SketchLayout from 'layouts/sketch';
 
 const Home = () => {
-  const [params, setParams] = useState<SketchParams>(defaultParams);
+  const [params] = useState<SketchParams>(defaultParams);
 
   useEffect(() => {
-    Sketch.setParams(params)
-  }, [params])
+    Sketch.setParams(params);
+  }, [params]);
 
   return (
-    <div>
-      <SketchComponent sketch={Sketch.render} />
-    </div>
+    <SketchLayout
+      title='Lissajous Curve'
+      sketch={Sketch.render}
+    />
   );
 };
 
