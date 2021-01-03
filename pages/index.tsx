@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Sketch, { SketchParams, defaultParams } from 'sketches/LissajousCurve';
+import Sketch, { SketchParams, defaultParams } from 'sketch/LissajousCurve';
 import SketchLayout from 'layouts/sketch';
 
 const Home = () => {

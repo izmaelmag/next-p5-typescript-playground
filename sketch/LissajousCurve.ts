@@ -1,5 +1,5 @@
 import p5 from 'p5';
-import Sketch from 'globals/Sketch';
+import Sketch from 'sketch';
 import lissajousCurve from 'utils/lissajousCurve';
 
 export type SketchParams = {

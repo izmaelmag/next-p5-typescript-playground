@@ -21,13 +21,14 @@
     "paths": {
       "components/*": ["components/*"],
       "utils/*": ["utils/*"],
+      "public/*": ["public/*"],
       "globals/*": ["globals/*"],
-      "sketches/*": ["sketches/*"],
+      "sketch/*": ["sketch/*"],
     }
   },
   "include": [
-    "next-env.d.ts",
-    "./globals/common.d.ts",
+    "types/next-env.d.ts",
+    "types/*.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "**/*.css"
