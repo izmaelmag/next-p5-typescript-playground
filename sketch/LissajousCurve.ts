@@ -50,17 +50,17 @@ class LissajousCurveSketch extends Sketch<SketchParams, TP5SketchFunction> {
     const xradius =  this.params.radius;
     const yradius =  this.params.radius;
 
-    p.push();
+    // Axes
     p.line(-xradius - this.linesDistance, ycoord, xradius, ycoord);
     p.line(xcoord, -yradius, xcoord, yradius + this.linesDistance);
 
-    p.strokeWeight(1)
+    // Point connectors
     p.line(this.x, this.y, this.x, ycoord);
     p.line(this.x, this.y, xcoord, this.y);
     
+    // Axes pointers
     p.circle(this.x, ycoord, 8);
     p.circle(xcoord, this.y, 8);
-    p.pop();
   };
 
   private drawCurve = (p: p5) => {

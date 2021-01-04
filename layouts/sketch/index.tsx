@@ -1,20 +1,20 @@
 import React, { FC } from 'react';
-import styles from './styles.module.css';
-import SketchComponent from 'components/P5Sketch'
+import SketchComponent from 'components/P5Sketch';
+import { Layout, SketchWrapper } from './styles';
 
 interface SketchLayoutProps {
   title?: string;
   subtitle?: string;
-  sketch?: TP5SketchFunction
+  sketch?: TP5SketchFunction;
 }
 
 const SketchLayout: FC<SketchLayoutProps> = ({ sketch }) => {
   return (
-    <main className={styles.layout}>
-      <div className={styles.sketch}>
+    <Layout>
+      <SketchWrapper>
         {sketch ? <SketchComponent sketch={sketch} /> : 'You should set sketch renderer function'}
-      </div>
-    </main>
+      </SketchWrapper>
+    </Layout>
   );
 };
 
