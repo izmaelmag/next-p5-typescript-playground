@@ -1,5 +1,5 @@
 import React from 'react'
-import GlobalStyles from 'globals/globalStyles'
+import GlobalStyles from 'layouts/globalStyles'
 
 const MyApp = ({ Component, pageProps }) => (
   <React.Fragment>
