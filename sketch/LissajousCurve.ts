@@ -1,7 +1,6 @@
 import p5 from 'p5';
 import Sketch from 'sketch';
 import lissajousCurve from 'utils/lissajousCurve';
-import sine from 'utils/sine';
 
 export type SketchParams = {
   onlyCurve?: boolean;

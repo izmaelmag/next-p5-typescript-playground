@@ -1,4 +1,4 @@
-import polypoints from 'utils/polypoints'
+import polypoints from './'
 
 describe('Polypoints', () => {
   test('It creates correct array of points with given options', () => {
