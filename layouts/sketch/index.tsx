@@ -5,7 +5,7 @@ import { Layout, SketchWrapper } from './styles';
 interface SketchLayoutProps {
   title?: string;
   subtitle?: string;
-  sketch?: TP5SketchFunction;
+  sketch?: P5SketchFunction;
 }
 
 const SketchLayout: FC<SketchLayoutProps> = ({ sketch }) => {

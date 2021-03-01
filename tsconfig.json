@@ -21,7 +21,7 @@
     "paths": {
       "utils/*": ["utils/*"],
       "public/*": ["public/*"],
-      "sketch/*": ["sketch/*"],
+      "sketches/*": ["sketches/*"],
       "themes/*": ["themes/*"],
       "globals/*": ["globals/*"],
       "layouts/*": ["layouts/*"],

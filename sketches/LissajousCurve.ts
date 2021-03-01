@@ -1,5 +1,5 @@
 import p5 from 'p5';
-import Sketch from 'sketch';
+import Sketch from 'sketches/Sketch';
 import lissajousCurve from 'utils/lissajousCurve';
 
 export type SketchParams = {
@@ -19,7 +19,7 @@ export const defaultParams: SketchParams = {
   }
 };
 
-class LissajousCurveSketch extends Sketch<SketchParams, TP5SketchFunction> {
+class LissajousCurveSketch extends Sketch<SketchParams> {
   private linesDistance = 10;
   private currentPhase = 0;
   private canvasSize = 480;
