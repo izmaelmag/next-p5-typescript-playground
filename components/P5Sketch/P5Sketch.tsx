@@ -8,13 +8,15 @@ const P5Sketch: FC<{
   sketch: P5SketchFunction;
 }> = ({ sketch, ...rest }) => {
   const container: React.RefObject<HTMLDivElement> = useRef(null);
-  const canvas: React.MutableRefObject<p5> = useRef(null);
+  const canvas: React.MutableRefObject<Optional<p5>> = useRef(null);
 
   useEffect(() => {
-    canvas.current = new p5(sketch, container.current);
+    if (container.current) {
+      canvas.current = new p5(sketch, container.current);
+    }
 
     // Removes canvas after sketch hot-reloading
-    return canvas.current.remove;
+    return canvas.current?.remove;
   }, [sketch]);
 
   return <div {...rest} ref={container} />;

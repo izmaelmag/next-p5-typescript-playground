@@ -21,7 +21,7 @@ class PrismSketch extends P5Sketch<SketchParams> {
   }
 
   private getPoints = (count: number) => {
-    const p = [];
+    const p: Point[] = [];
 
     for (let i = 0; i < count; i++) {
       p.push({
@@ -34,7 +34,7 @@ class PrismSketch extends P5Sketch<SketchParams> {
   };
 
   updatePoints = (points: Point[]): Point[] => {
-    let updatedPoints = [];
+    let updatedPoints: Point[] = [];
 
     for (let i = 0; i < points.length; i++) {
       let point = points[i];
@@ -44,7 +44,7 @@ class PrismSketch extends P5Sketch<SketchParams> {
         dt: this.dt,
         speed: 2,
         phase: 0.14 * i
-      })
+      });
 
       let yOff = sine({
         from: -16,
@@ -52,10 +52,10 @@ class PrismSketch extends P5Sketch<SketchParams> {
         dt: this.dt,
         speed: 1,
         phase: 0.1 * i
-      })
+      });
 
       updatedPoints.push({
-        x:point.x + xOff,
+        x: point.x + xOff,
         y: point.y + (i ? yOff : 0)
       });
     }
@@ -80,13 +80,13 @@ class PrismSketch extends P5Sketch<SketchParams> {
       let updatedPoints = this.updatePoints(points);
 
       for (let i = 0; i < updatedPoints.length; i++) {
-        let point = updatedPoints[i]
-        let hue = ((this.dt + i/5) * 100 % 360).toFixed();
+        let point = updatedPoints[i];
+        let hue = (((this.dt + i / 5) * 100) % 360).toFixed();
         p.stroke(`hsl(${hue}, 50%, 50%)`);
-  
+
         p.line(point.x, point.y, this.start.x, this.start.y);
         p.line(point.x, point.y, this.end.x, this.end.y);
-  
+
         if (i > 0) {
           p.line(point.x, point.y, updatedPoints[i - 1].x, updatedPoints[i - 1].y);
         }
