@@ -1,8 +1,9 @@
 import p5 from "p5"
 
-export default class Sketch<SketchParams> {
+export default class P5Sketch<SketchParams> {
   params: SketchParams
   p: p5
+  size: number
   
   constructor({ defaults }) {
     this.params = {

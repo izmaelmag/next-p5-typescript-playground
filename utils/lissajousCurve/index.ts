@@ -4,7 +4,7 @@
 type lissajousCurveParams = {
   phase: number;
   radius: number;
-  period: Vector2D;
+  period: Point;
 };
 
 /**

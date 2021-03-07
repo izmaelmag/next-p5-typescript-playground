@@ -1,19 +1,21 @@
 import styled from 'styled-components'
 
 export const Layout = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 20px 32px;
   position: relative;
-  overflow: hidden;
 `
 
-export const SketchWrapper = styled.div`
-  position: absolute;
+export const SketchWrapper = styled.div<{ size: number }>`
   width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+  max-width: ${props => props.size}px;
+  max-height: ${props => props.size}px;
+  aspect-ratio: 1/1;
   display: flex;
-  align-items: center;
+  margin: 0 auto;
+  align-items: flex-start;
   justify-content: center;
+  overflow: hidden;
 `

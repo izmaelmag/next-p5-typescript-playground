@@ -1,28 +1,29 @@
 import p5 from 'p5';
-import Sketch from 'sketches/Sketch';
+import P5Sketch from 'sketches/P5Sketch';
 import lissajousCurve from 'utils/lissajousCurve';
 
 export type SketchParams = {
   onlyCurve?: boolean;
   phaseSpeed?: number;
   radius?: number;
-  period: Vector2D;
+  period: Point;
 };
 
 export const defaultParams: SketchParams = {
-  onlyCurve: true,
-  phaseSpeed: 12,
-  radius: 60,
+  onlyCurve: false,
+  phaseSpeed: 5,
+  radius: 80,
   period: {
-    x: 2,
-    y: 1
+    x: 1,
+    y: 0.75
   }
 };
 
-class LissajousCurveSketch extends Sketch<SketchParams> {
-  private linesDistance = 10;
+class LissajousCurveSketch extends P5Sketch<SketchParams> {
+  private linesDistance = 40;
   private currentPhase = 0;
-  private canvasSize = 480;
+
+  size = 360;
 
   private get curvePoints(): Point[] {
     return lissajousCurve({
@@ -78,7 +79,7 @@ class LissajousCurveSketch extends Sketch<SketchParams> {
   }
 
   private drawPoint = (p: p5) => {
-    p.fill(255);
+    p.fill(20);
     p.circle(this.x, this.y, 4);
   };
 
@@ -86,9 +87,9 @@ class LissajousCurveSketch extends Sketch<SketchParams> {
     this.p = p;
 
     p.setup = () => {
-      p.createCanvas(this.canvasSize, this.canvasSize);
-      p.background(0);
-      p.stroke(255);
+      p.createCanvas(this.size, this.size);
+      p.background(255);
+      p.stroke(20);
     };
 
     p.draw = () => {
@@ -96,8 +97,8 @@ class LissajousCurveSketch extends Sketch<SketchParams> {
 
       this.currentPhase += phaseSpeed / 1000;
 
-      p.background(0);
-      p.translate(this.canvasSize / 2, this.canvasSize / 2);
+      p.background(255);
+      p.translate(this.size / 2, this.size / 2);
 
       this.drawCurve(p);
 

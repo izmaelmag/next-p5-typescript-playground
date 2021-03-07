@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Sketch, { SketchParams, defaultParams } from 'sketches/LissajousCurve';
+import Sketch, { SketchParams, defaultParams } from 'sketches/Prism';
 import SketchLayout from 'layouts/sketch';
 
 const Lissajous = () => {
@@ -7,7 +7,7 @@ const Lissajous = () => {
 
   useEffect(() => Sketch.setParams(params), [params]);
 
-  return <SketchLayout title='Lissajous Curve' sketch={Sketch.render} size={Sketch.size} />;
+  return <SketchLayout title='Prism' sketch={Sketch.render} size={Sketch.size} />;
 };
 
 export default Lissajous;
