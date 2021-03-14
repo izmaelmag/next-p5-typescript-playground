@@ -18,4 +18,5 @@ export const SketchWrapper = styled.div<{ size: number }>`
   align-items: flex-start;
   justify-content: center;
   overflow: hidden;
+  border: 1px solid #eee;
 `

@@ -5,17 +5,17 @@ import lissajousCurve from 'utils/lissajousCurve';
 export type SketchParams = {
   onlyCurve?: boolean;
   phaseSpeed?: number;
-  radius?: number;
+  radius: number;
   period: Point;
 };
 
 export const defaultParams: SketchParams = {
-  onlyCurve: false,
+  onlyCurve: true,
   phaseSpeed: 5,
   radius: 80,
   period: {
-    x: 1,
-    y: 0.75
+    x: 7,
+    y: 4
   }
 };
 

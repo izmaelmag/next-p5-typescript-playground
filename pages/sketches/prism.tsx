@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
-import Sketch, { SketchParams, defaultParams } from 'sketches/Prism';
+import { useEffect } from 'react';
+import { useControls } from 'leva';
+import Sketch, { SketchParams, controls } from 'sketches/Prism';
 import SketchLayout from 'layouts/sketch';
 
 const Lissajous = () => {
-  const [params] = useState<SketchParams>(defaultParams);
+  const controlsParams: SketchParams = useControls(controls);
 
-  useEffect(() => Sketch.setParams(params), [params]);
+  useEffect(() => Sketch.setParams(controlsParams), [controlsParams]);
 
-  return <SketchLayout title='Prism' sketch={Sketch.render} size={Sketch.size} />;
+  return <SketchLayout title='Liquid Prism' sketch={Sketch.render} size={Sketch.size} />;
 };
 
 export default Lissajous;

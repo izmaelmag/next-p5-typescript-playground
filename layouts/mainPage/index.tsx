@@ -19,7 +19,7 @@ const MainPageLayout = () => {
               height={512}
             />
 
-            <PreviewTitle>Prism</PreviewTitle>
+            <PreviewTitle>Liquid Prism</PreviewTitle>
           </Preview>
         </Link>
       </Gallery>
