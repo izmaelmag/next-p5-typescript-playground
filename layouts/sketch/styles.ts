@@ -9,14 +9,17 @@ export const Layout = styled.div`
 `
 
 export const SketchWrapper = styled.div<{ size: number }>`
-  width: 100%;
-  max-width: ${props => props.size}px;
-  max-height: ${props => props.size}px;
-  aspect-ratio: 1/1;
+  width: ${props => props.size}px;
+  height: ${props => props.size}px;
   display: flex;
   margin: 0 auto;
   align-items: flex-start;
   justify-content: center;
   overflow: hidden;
   border: 1px solid #eee;
+
+  canvas {
+    width: 100%;
+    height: 100%;
+  }
 `

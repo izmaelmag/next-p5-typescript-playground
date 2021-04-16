@@ -22,6 +22,19 @@ const MainPageLayout = () => {
             <PreviewTitle>Liquid Prism</PreviewTitle>
           </Preview>
         </Link>
+
+        <Link href='/sketches/medusa'>
+          <Preview>
+            <Image
+              src='/images/sketches/medusa.png'
+              alt='Medusa animation'
+              width={512}
+              height={512}
+            />
+
+            <PreviewTitle>Medusa</PreviewTitle>
+          </Preview>
+        </Link>
       </Gallery>
     </Page>
   );
