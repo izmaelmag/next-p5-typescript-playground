@@ -9,7 +9,9 @@ export const defaultParams: SketchParams = {
   amplitude: 10,
   frequency: 94.5,
   showLines: true,
-  showPolygons: true
+  showPolygons: true,
+  color: '#aa0000',
+  background: '#000000'
 };
 
 export const controls = {
@@ -23,7 +25,7 @@ export const controls = {
   polygonsNumber: {
     value: defaultParams.polygonsNumber,
     min: 1,
-    max: 200,
+    max: 500,
     step: 1,
     label: 'Layers'
   },
@@ -37,7 +39,7 @@ export const controls = {
   phaseOffset: {
     value: defaultParams.phaseOffset,
     min: 0,
-    max: 50,
+    max: 100,
     step: 0.1,
     label: 'Phase offset'
   },
@@ -51,15 +53,15 @@ export const controls = {
   amplitude: {
     value: defaultParams.amplitude,
     min: 0,
-    max: 200,
+    max: 360,
     step: 0.1,
     label: 'Amplitude'
   },
   frequency: {
     value: defaultParams.frequency,
     min: 0,
-    max: 200,
-    step: 0.1,
+    max: 360,
+    step: 0.01,
     label: 'Frequency'
   },
   showLines: {
@@ -69,5 +71,13 @@ export const controls = {
   showPolygons: {
     value: defaultParams.showPolygons,
     label: 'Polygons'
+  },
+  color: {
+    value: defaultParams.color,
+    label: 'Color'
+  },
+  background: {
+    value: defaultParams.background,
+    label: 'Background'
   }
 }

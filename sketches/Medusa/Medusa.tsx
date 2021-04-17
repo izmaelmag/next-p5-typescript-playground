@@ -6,7 +6,6 @@ import { defaultParams } from './params'
 
 class Medusa extends P5Sketch<SketchParams> {
   size = 480;
-  color = '#aa0000'
 
   center = {
     x: this.size/2,
@@ -37,15 +36,15 @@ class Medusa extends P5Sketch<SketchParams> {
         showLines
       } = this.params;
 
-      p.background(0);
-      p.stroke(this.color);
-      p.fill(this.color);
+      p.background(this.params.background);
+      p.stroke(this.params.color);
+      p.fill(this.params.color);
 
       if (showPolygons) {
         p.noFill()
       }
 
-      for (let i = polygonsNumber; i > 0; i--) {
+      for (let i = polygonsNumber; i >= 0; i--) {
         let currentPoints = polypoints({
           vertices: vertices,
           center: this.center,

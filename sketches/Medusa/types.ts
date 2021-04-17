@@ -8,4 +8,6 @@ export type SketchParams = {
   frequency: number;
   showLines: boolean;
   showPolygons: boolean;
-}
+  color: string;
+  background: string;
+};
