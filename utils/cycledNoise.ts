@@ -1,13 +1,14 @@
 import { makeNoise2D } from 'open-simplex-noise';
 
 type Params = {
+  seed?: number;
   length: number;
 };
 
-const cycledNoiseValues = ({ length }: Params): number[] => {
+const cycledNoiseValues = ({ length, seed }: Params): number[] => {
   const values = [];
   const step = (Math.PI / 180) * (360 / (length-1));
-  const Noise2D = makeNoise2D(Date.now());
+  const Noise2D = makeNoise2D(seed ? seed : Date.now());
 
   for (let a = 0; a < Math.PI * 2; a += step) {
     let nx = Math.cos(a) + 1;
