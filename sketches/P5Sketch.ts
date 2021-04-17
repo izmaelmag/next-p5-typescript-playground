@@ -4,6 +4,10 @@ export default class P5Sketch<SketchParams> {
   params: SketchParams
   p: p5
   size: number
+
+  get dt() {
+    return this.p.millis() / 1000;
+  }
   
   constructor({ defaults }) {
     this.params = {

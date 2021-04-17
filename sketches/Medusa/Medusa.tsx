@@ -12,10 +12,6 @@ class Medusa extends P5Sketch<SketchParams> {
     y: this.size/2
   }
 
-  private get dt() {
-    return this.p.millis() / 1000;
-  }
-
   render = (p: p5) => {
     this.p = p;
 
