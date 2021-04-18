@@ -13,7 +13,7 @@ interface SketchLayoutProps {
 const SketchLayout: FC<SketchLayoutProps> = ({ title, subtitle, sketch, size }) => {
   return (
     <Layout>
-      <PageHeader {...{ title, subtitle }} homeLink />
+      <PageHeader {...{ title, subtitle }} />
 
       <SketchWrapper size={size}>
         {sketch ? <SketchComponent sketch={sketch} /> : 'You should set sketch renderer function'}
