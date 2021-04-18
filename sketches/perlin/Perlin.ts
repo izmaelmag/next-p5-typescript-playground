@@ -1,57 +1,53 @@
 import p5 from 'p5';
 import P5Sketch from 'sketches/P5Sketch';
 import { SketchParams } from './types';
-import cycledNoiseValues from 'utils/cycledNoise';
+import { makeNoise4D } from 'open-simplex-noise';
 
-class Medusa extends P5Sketch<SketchParams> {
-  size = 600;
-  points = [];
-  state = {
-    xPos: this.size / 2
-  };
-
-  setPoints = () => {
-    for (let i = 0; i < this.p.width; i += 2) {
-      this.points.push({
-        x: i,
-        y: this.p.height / 2,
-        noise: cycledNoiseValues({ length: 360 }),
-        intense: 0
-      });
-    }
-  };
+class Perlin extends P5Sketch<SketchParams> {
+  size = 512;
+  scale = 0.02;
 
   render = (p: p5) => {
     this.p = p;
 
+    const Noise4D = makeNoise4D(123)
+
     p.setup = () => {
       p.createCanvas(this.size, this.size);
-      this.setPoints();
-      p.stroke(255);
+      p.strokeWeight(1)
       p.noFill();
     };
-    let t = 0;
-
+    
     p.draw = () => {
       p.background(0);
-
-      p.beginShape();
-      for (let i = 0; i < this.points.length; i++) {
-        const { x, y, noise } = this.points[i];
-
-        let dist = Math.abs(p.width / 2 - x);
-        let intense =
-          100 * (Math.sin(this.dt) + 1) * p.constrain(1 - p.map(dist, 0, 100 * (Math.sin(this.dt) + 1), 0, 1), 0, 1);
-        let dy = intense * noise[t % 360];
-
-        p.vertex(x, y + dy);
+      
+      
+      let center = this.size/2;
+      let lines = 40
+      
+      for (let j = 0; j < lines; j++) {
+        p.beginShape();
+        for (let i = 0; i <= this.size; i+=4) {
+          let x = i, y = 0;
+          p.stroke(255);
+          
+          
+          let radius = 1;
+          let distance = center - Math.abs(center-x)
+          let intense = p.constrain(distance, 0, 100)/100
+          let noiseAngle = p.TWO_PI * (this.dt + j*0.1)/10
+          
+          let noiseX = Noise4D(this.scale * x + 100, this.scale * y + 100, radius * Math.cos(noiseAngle), radius * Math.sin(noiseAngle))
+          let noiseY = Noise4D(this.scale * x, this.scale * y, radius * Math.cos(noiseAngle), radius * Math.sin(noiseAngle))
+          
+          p.point(x + (intense * 50 * noiseX), y + (50 * intense * noiseY) + j*15);
+        }
+        p.endShape();
       }
-      p.endShape();
-      t++;
     };
   };
 }
 
-const sketch = new Medusa({ defaults: {} });
+const sketch = new Perlin({ defaults: {} });
 
 export default sketch;

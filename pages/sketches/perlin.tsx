@@ -8,7 +8,7 @@ const Lissajous = () => {
 
   useEffect(() => Sketch.setParams(controlsParams), [controlsParams]);
 
-  return <SketchLayout title='Perlin' sketch={Sketch.render} size={Sketch.size} />;
+  return <SketchLayout title='Simplex Noise' sketch={Sketch.render} size={Sketch.size} />;
 };
 
 export default Lissajous;
