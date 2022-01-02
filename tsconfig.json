@@ -26,7 +26,7 @@
       "themes/*": ["themes/*"],
       "globals/*": ["globals/*"],
       "layouts/*": ["layouts/*"],
-      "components/*": ["design/components/*"],
+      "components/*": ["components/*"],
     }
   },
   "include": [

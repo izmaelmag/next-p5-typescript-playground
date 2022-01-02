@@ -27,6 +27,7 @@ class Medusa extends P5Sketch<SketchParams> {
         gap,
         phaseOffset,
         speed,
+        pointSize,
         amplitude,
         frequency,
         showLines
@@ -68,7 +69,7 @@ class Medusa extends P5Sketch<SketchParams> {
         }
         
         if (!showLines && !showPolygons) {
-          currentPoints.forEach(({x, y}) => p.circle(x, y, 1))
+          currentPoints.forEach(({x, y}) => p.circle(x, y, pointSize))
         }
       }
     };

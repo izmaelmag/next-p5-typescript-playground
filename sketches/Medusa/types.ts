@@ -8,6 +8,7 @@ export type SketchParams = {
   frequency: number;
   showLines: boolean;
   showPolygons: boolean;
+  pointSize: number;
   color: string;
   background: string;
 };

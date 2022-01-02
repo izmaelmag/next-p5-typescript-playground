@@ -5,6 +5,7 @@ export const defaultParams: SketchParams = {
   polygonsNumber: 60,
   gap: 10,
   phaseOffset: 30,
+  pointSize: 1,
   speed: 32,
   amplitude: 10,
   frequency: 94.5,
@@ -71,6 +72,10 @@ export const controls = {
   showPolygons: {
     value: defaultParams.showPolygons,
     label: 'Polygons'
+  },
+  pointSize: {
+    value: defaultParams.pointSize,
+    label: 'Point size'
   },
   color: {
     value: defaultParams.color,
