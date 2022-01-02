@@ -15,7 +15,6 @@ const P5Sketch: FC<{
       canvas.current = new p5(sketch, container.current);
     }
 
-    // Removes canvas after sketch hot-reloading
     return canvas.current?.remove;
   }, [sketch]);
 

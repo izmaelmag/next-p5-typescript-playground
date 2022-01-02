@@ -1,2 +1,3 @@
 import MainPageLayout from 'layouts/mainPage'
-export default () => <MainPageLayout />;
+const MainPage = () => <MainPageLayout />;
+export default MainPage

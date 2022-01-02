@@ -61,8 +61,8 @@ export const controls = {
   frequency: {
     value: defaultParams.frequency,
     min: 0,
-    max: 360,
-    step: 0.01,
+    max: 60,
+    step: 0.001,
     label: 'Frequency'
   },
   showLines: {
