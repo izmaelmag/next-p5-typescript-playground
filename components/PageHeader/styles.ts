@@ -2,16 +2,13 @@ import styled from 'styled-components';
 import { Playfair, PlayfairSC } from 'design/fonts';
 
 export const Header = styled.header`
-  margin: 24px 0;
-  padding-bottom: 16px;
-  text-align: center;
+  margin: 20px 0;
   position: relative;
 
   a {
     font-size: 16px;
     line-height: 20px;
-    font-style: italic;
-    font-family: ${Playfair};
+    font-family: ${PlayfairSC};
     color: #666;
     background-image: linear-gradient(to bottom, transparent 18px, #ccc 19px);
     background-size: 1px 19px;

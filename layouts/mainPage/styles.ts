@@ -4,8 +4,8 @@ import styled, { css } from 'styled-components';
 export const Page = styled.main`
   width: 100%;
   min-height: 100vh;
-  padding: 0 20px;
   max-width: 640px;
+  padding: 0 20px;
   margin: 0 auto;
 `;
 
@@ -15,8 +15,7 @@ export const Gallery = styled.section`
   grid-gap: 16px;
 `;
 
-type PreviewProps = { wide?: boolean };
-export const Preview = styled.div<PreviewProps>`
+export const Preview = styled.div<{ wide?: boolean }>`
   position: relative;
   width: 100%;
   background-color: #fff;

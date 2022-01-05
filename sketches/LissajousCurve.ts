@@ -74,10 +74,6 @@ class LissajousCurveSketch extends P5Sketch<SketchParams> {
     p.pop();
   };
 
-  private get dt() {
-    return this.p.millis() / 1000;
-  }
-
   private drawPoint = (p: p5) => {
     p.fill(20);
     p.circle(this.x, this.y, 4);
