@@ -7,7 +7,7 @@ import { Page, Gallery, Preview, PreviewTitle } from './styles';
 const MainPageLayout = () => {
   return (
     <Page>
-      <PageHeader title='Izmael Magomedov' subtitle='Full-stack web developer' />
+      <PageHeader title='Processing playground' />
 
       <Gallery>
         <Link href='/sketches/prism'>

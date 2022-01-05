@@ -2,9 +2,15 @@
  * @param {number} precision –
  */
 type lissajousCurveParams = {
-  phase: number;
+  phase: {
+    x: number;
+    y: number;
+  };
   radius: number;
-  period: Point;
+  period: {
+    x: number;
+    y: number;
+  };
 };
 
 /**
@@ -15,12 +21,12 @@ type lissajousCurveParams = {
 const lissajousCurve = ({ radius, period, phase }: lissajousCurveParams): Point[] => {
   const points = [];
 
-  const fullAmplitude = period.x * radius * 2
+  const fullAmplitude = period.x * radius;
 
-  for (let step = 0; step < fullAmplitude ; step += 0.1) {
+  for (let step = 0; step < fullAmplitude; step += 0.5) {
     points.push({
-      x: radius * Math.sin(step / period.x + phase),
-      y: radius * Math.cos(step / period.y + phase)
+      x: radius * Math.sin(step / period.x + phase.x),
+      y: radius * Math.cos(step / period.y + phase.y)
     });
   }
 

@@ -1,44 +1,34 @@
 import p5 from 'p5';
 import P5Sketch from 'sketches/P5Sketch';
 import lissajousCurve from 'utils/lissajousCurve';
-
-export type SketchParams = {
-  onlyCurve?: boolean;
-  phaseSpeed: number;
-  radius: number;
-  period: Point;
-};
-
-export const defaultParams: SketchParams = {
-  onlyCurve: true,
-  phaseSpeed: 5,
-  radius: 80,
-  period: {
-    x: 7,
-    y: 4
-  }
-};
+import { defaultParams, SketchParams } from './data';
 
 class LissajousCurveSketch extends P5Sketch<SketchParams> {
-  private linesDistance = 40;
-  private currentPhase = 0;
+  private linesDistance = 10;
+  private currentPhase = {
+    x: 0,
+    y: 0
+  };
 
-  size = 360;
+  size = 420;
 
   private get curvePoints(): Point[] {
     return lissajousCurve({
       radius: this.params.radius,
-      period: this.params.period,
+      period: {
+        x: this.params.xFreq,
+        y: this.params.yFreq
+      },
       phase: this.currentPhase
     });
   }
 
   private get x(): number {
-    return this.params.radius * Math.sin(this.dt / this.params.period.x + this.currentPhase);
+    return this.params.radius * Math.sin((this.dt / this.params.xFreq) * this.params.speed + this.currentPhase.x);
   }
 
   private get y(): number {
-    return this.params.radius * Math.cos(this.dt / this.params.period.y + this.currentPhase);
+    return this.params.radius * Math.cos((this.dt / this.params.yFreq) * this.params.speed + this.currentPhase.y);
   }
 
   private drawAxes = (p: p5) => {
@@ -56,11 +46,14 @@ class LissajousCurveSketch extends P5Sketch<SketchParams> {
     p.line(this.x, this.y, xcoord, this.y);
 
     // Axes pointers
+    p.fill(20)
     p.circle(this.x, ycoord, 8);
     p.circle(xcoord, this.y, 8);
   };
 
-  private drawCurve = (p: p5) => {
+  private drawCurve = () => {
+    const p = this.p;
+
     p.push();
     p.noFill();
     p.stroke(255, 0, 0);
@@ -82,25 +75,37 @@ class LissajousCurveSketch extends P5Sketch<SketchParams> {
   render = (p: p5) => {
     this.p = p;
 
+    let bg = null
+    const half = this.size / 2
+
     p.setup = () => {
+      bg = p.createGraphics(this.size, this.size)
+
       p.createCanvas(this.size, this.size);
       p.background(255);
+      bg.background(255, 0, 0);
       p.stroke(20);
+      bg.noStroke(20);
+      bg.fill(20)
     };
 
     p.draw = () => {
-      const { phaseSpeed, onlyCurve } = this.params;
-
-      this.currentPhase += phaseSpeed / 1000;
+      this.currentPhase.x += this.params.phaseSpeedX / 1000;
+      this.currentPhase.y += this.params.phaseSpeedY / 1000;
 
       p.background(255);
-      p.translate(this.size / 2, this.size / 2);
+      p.translate(half, half);
+      // bg.translate(half, half)
 
-      this.drawCurve(p);
+      // this.drawCurve();
 
-      if (!onlyCurve) {
+      bg.circle(this.x, this.y, 2)
+
+      p.image(bg, 0, 0)
+
+      if (this.params.showRulers) {
         this.drawAxes(p);
-        this.drawPoint(p);
+        // this.drawPoint(p);
       }
     };
   };

@@ -1,2 +1,2 @@
-import Page from 'sketches/Prism/Page'
+import Page from 'sketches/Prism'
 export default Page;

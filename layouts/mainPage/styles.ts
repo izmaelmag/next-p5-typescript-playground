@@ -4,20 +4,19 @@ import styled, { css } from 'styled-components';
 export const Page = styled.main`
   width: 100%;
   min-height: 100vh;
-  max-width: 640px;
   padding: 0 20px;
   margin: 0 auto;
 `;
 
 export const Gallery = styled.section`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 240px);
   grid-gap: 16px;
 `;
 
 export const Preview = styled.div<{ wide?: boolean }>`
   position: relative;
-  width: 100%;
+  width: 240px;
   background-color: #fff;
   box-shadow: 0 0 0 1px #e7ebf1 inset;
   display: block;
