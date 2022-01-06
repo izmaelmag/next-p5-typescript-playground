@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useControls } from 'leva';
-import Sketch, { SketchParams, controls } from 'sketches/perlin';
+import Sketch, { SketchParams, controls } from 'sketches/Perlin';
 import SketchLayout from 'layouts/sketch';
 
 const Lissajous = () => {
