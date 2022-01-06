@@ -63,7 +63,7 @@ const AudioExpPage = () => {
     <Page onMouseMove={handleMouseMove}>
       <GlobalStyle />
 
-      <h1>Check</h1>
+      <h1>Oscillator test</h1>
       <button onClick={startOscillator}>Start</button>
       <button onClick={stopOscillator}>Stop</button>
     </Page>
