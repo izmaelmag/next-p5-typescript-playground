@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import { createGlobalStyle } from 'styled-components';
-import Head from 'next/head'
+import Head from 'next/head';
 
 const GlobalStyles = createGlobalStyle`
   html,
@@ -10,10 +10,11 @@ const GlobalStyles = createGlobalStyle`
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     background-color: #fafafa;
+    font-family: 'Courier Prime', monospace;
   }
 
   a {
-    color: inherit;
+    /* color: inherit; */
     text-decoration: none;
   }
 
@@ -27,18 +28,17 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-
 // Applies global styles
 const MyApp = ({ Component, pageProps }) => (
   <React.Fragment>
     <GlobalStyles />
     <Head>
-      <link rel="preconnect" href="https://fonts.gstatic.com" />
-      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,900;1,400&display=swap" rel="stylesheet" />
-      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet" />
+      <link rel='preconnect' href='https://fonts.googleapis.com' />
+      <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='true' />
+      <link href='https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap' rel='stylesheet' />
     </Head>
     <Component {...pageProps} />
   </React.Fragment>
-)
+);
 
-export default MyApp
+export default MyApp;

@@ -1,41 +1,27 @@
 import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
 import PageHeader from 'components/PageHeader';
-import { Page, Gallery, Preview, PreviewTitle } from './styles';
+import { Page, Group, GroupTitle, GroupLinks, GroupLink } from './styles';
 
 const MainPageLayout = () => {
   return (
     <Page>
       <PageHeader title='Processing playground' />
 
-      <Gallery>
-        <Link href='/sketches/prism'>
-          <Preview>
-            <Image
-              src='/images/sketches/prism.png'
-              alt='Prism animation'
-              width={512}
-              height={512}
-            />
+      <Group>
+        <GroupTitle>2D Sine series</GroupTitle>
+        <GroupLinks>
+          <GroupLink href='/sketches/prism'>Prism</GroupLink>
+          <GroupLink href='/sketches/medusa'>Medusa</GroupLink>
+        </GroupLinks>
+      </Group>
 
-            <PreviewTitle>Liquid Prism</PreviewTitle>
-          </Preview>
-        </Link>
-
-        <Link href='/sketches/medusa'>
-          <Preview>
-            <Image
-              src='/images/sketches/medusa.png'
-              alt='Medusa animation'
-              width={512}
-              height={512}
-            />
-
-            <PreviewTitle>Medusa</PreviewTitle>
-          </Preview>
-        </Link>
-      </Gallery>
+      <Group>
+        <GroupTitle>Experiments</GroupTitle>
+        <GroupLinks>
+          <GroupLink href='/experiments/audio-source'>Audio visualiser</GroupLink>
+          <GroupLink href='/experiments/oscillator'>Sound oscillator</GroupLink>
+        </GroupLinks>
+      </Group>
     </Page>
   );
 };

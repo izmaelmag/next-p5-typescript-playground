@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Playfair, PlayfairSC } from 'design/fonts';
 
 export const Header = styled.header`
   margin: 20px 0;
@@ -8,7 +7,6 @@ export const Header = styled.header`
   a {
     font-size: 16px;
     line-height: 20px;
-    font-family: ${PlayfairSC};
     color: #666;
     background-image: linear-gradient(to bottom, transparent 18px, #ccc 19px);
     background-size: 1px 19px;
@@ -25,7 +23,6 @@ export const Title = styled.h1`
   color: #212121;
   font-size: 36px;
   line-height: 40px;
-  font-family: ${PlayfairSC};
   font-weight: 400;
 `;
 
@@ -35,7 +32,6 @@ export const Subtitle = styled.h2`
   font-size: 14px;
   line-height: 20px;
   color: #555;
-  font-family: ${PlayfairSC};
   font-weight: 400;
   letter-spacing: 2px;
   text-transform: uppercase;

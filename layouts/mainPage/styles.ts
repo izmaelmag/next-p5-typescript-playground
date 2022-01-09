@@ -1,5 +1,5 @@
-import { Playfair, PlayfairSC } from 'design/fonts';
-import styled, { css } from 'styled-components';
+import Link from 'next/link';
+import styled from 'styled-components';
 
 export const Page = styled.main`
   width: 100%;
@@ -8,65 +8,35 @@ export const Page = styled.main`
   margin: 0 auto;
 `;
 
-export const Gallery = styled.section`
-  display: grid;
-  grid-template-columns: repeat(2, 240px);
-  grid-gap: 16px;
+export const Group = styled.section`
+  &:not(:last-of-type) {
+    margin-bottom: 24px;
+  }
 `;
 
-export const Preview = styled.div<{ wide?: boolean }>`
-  position: relative;
-  width: 240px;
-  background-color: #fff;
-  box-shadow: 0 0 0 1px #e7ebf1 inset;
-  display: block;
-  cursor: pointer;
-  transition: box-shadow 0.2s ease;
-  font-size: 0;
-  line-height: 0;
-  overflow: hidden;
+export const GroupTitle = styled.h3`
+  margin-bottom: 4px;
 
-  ${props =>
-    props.wide &&
-    css`
-      grid-column-start: 1;
-      grid-column-end: 3;
-      aspect-ratio: 1/0.5;
-    `}
-
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 48px;
-    background: linear-gradient(to top, #000, transparent);
+  &::before {
+    content: '༄ ';
   }
+`;
 
-  img {
-    transform: scale(1);
-    transition: transform 0.2s ease;
-  }
+export const GroupLinks = styled.nav`
+  display: flex;
+  align-items: baseline;
 
-  &:hover {
-    box-shadow: 0 0 0 1px #ccc inset;
+  a {
+    color: blue;
 
-    img {
-      transform: scale(1.05)
+    &:not(:first-child)::before {
+      content: ' ';
+    }
+
+    &:not(:last-child)::after {
+      content: ' 𐬺';
     }
   }
 `;
 
-export const PreviewTitle = styled.div`
-  position: absolute;
-  bottom: 0px;
-  left: 0;
-  padding: 0 8px 8px;
-  font-size: 24px;
-  line-height: 1;
-  color: white;
-  font-family: ${PlayfairSC};
-  z-index: 1;
-`;
+export const GroupLink = styled(Link)``;
