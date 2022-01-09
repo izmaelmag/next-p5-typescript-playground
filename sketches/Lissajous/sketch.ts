@@ -46,7 +46,7 @@ class LissajousCurveSketch extends P5Sketch<SketchParams> {
     p.line(this.x, this.y, xcoord, this.y);
 
     // Axes pointers
-    p.fill(20)
+    p.fill(20);
     p.circle(this.x, ycoord, 8);
     p.circle(xcoord, this.y, 8);
   };
@@ -75,18 +75,12 @@ class LissajousCurveSketch extends P5Sketch<SketchParams> {
   render = (p: p5) => {
     this.p = p;
 
-    let bg = null
-    const half = this.size / 2
+    const half = this.size / 2;
 
     p.setup = () => {
-      bg = p.createGraphics(this.size, this.size)
-
       p.createCanvas(this.size, this.size);
       p.background(255);
-      bg.background(255, 0, 0);
       p.stroke(20);
-      bg.noStroke(20);
-      bg.fill(20)
     };
 
     p.draw = () => {
@@ -95,17 +89,12 @@ class LissajousCurveSketch extends P5Sketch<SketchParams> {
 
       p.background(255);
       p.translate(half, half);
-      // bg.translate(half, half)
 
-      // this.drawCurve();
-
-      bg.circle(this.x, this.y, 2)
-
-      p.image(bg, 0, 0)
+      this.drawCurve();
 
       if (this.params.showRulers) {
         this.drawAxes(p);
-        // this.drawPoint(p);
+        this.drawPoint(p);
       }
     };
   };

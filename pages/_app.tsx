@@ -16,6 +16,11 @@ const GlobalStyles = createGlobalStyle`
   a {
     /* color: inherit; */
     text-decoration: none;
+    color: #ff8300;
+
+    &:hover {
+      color: #ffb200;
+    }
   }
 
   * {

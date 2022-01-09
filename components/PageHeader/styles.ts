@@ -3,19 +3,6 @@ import styled from 'styled-components';
 export const Header = styled.header`
   margin: 20px 0;
   position: relative;
-
-  a {
-    font-size: 16px;
-    line-height: 20px;
-    color: #666;
-    background-image: linear-gradient(to bottom, transparent 18px, #ccc 19px);
-    background-size: 1px 19px;
-
-    &:hover {
-      color: #333;
-      background-image: linear-gradient(to bottom, transparent 18px, #aaa 19px);
-    }
-  }
 `;
 
 export const Title = styled.h1`
@@ -24,6 +11,13 @@ export const Title = styled.h1`
   font-size: 36px;
   line-height: 40px;
   font-weight: 400;
+
+  display: flex;
+  align-items: center;
+
+  a {
+    margin-right: 10px;
+  }
 `;
 
 export const Subtitle = styled.h2`

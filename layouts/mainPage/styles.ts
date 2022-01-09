@@ -26,16 +26,12 @@ export const GroupLinks = styled.nav`
   display: flex;
   align-items: baseline;
 
-  a {
-    color: blue;
+  a:not(:first-child)::before {
+    content: ' ';
+  }
 
-    &:not(:first-child)::before {
-      content: ' ';
-    }
-
-    &:not(:last-child)::after {
-      content: ' 𐬺';
-    }
+  a:not(:last-child)::after {
+    content: ' 𐬺';
   }
 `;
 

@@ -22,17 +22,13 @@ class AusioSource extends P5Sketch<{ frequencyData: Uint8Array }> {
     };
 
     p.draw = () => {
-      p.background('rgba(0, 0, 0, 0.002)');
+      p.background('rgba(0, 0, 0, 0.05)');
 
       for (let x = 0; x <= width; x += step) {
         const val = this.params.frequencyData[x];
-        const val2 = this.params.frequencyData.reverse()[x];
 
         p.stroke('red');
         p.point(x, height - val / 2);
-
-        p.stroke('green');
-        p.point(512 - x, height - val2 / 2);
       }
     };
   };

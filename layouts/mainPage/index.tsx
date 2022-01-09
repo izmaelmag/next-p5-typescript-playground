@@ -10,16 +10,18 @@ const MainPageLayout = () => {
       <Group>
         <GroupTitle>2D Sine series</GroupTitle>
         <GroupLinks>
-          <GroupLink href='/sketches/prism'>Prism</GroupLink>
-          <GroupLink href='/sketches/medusa'>Medusa</GroupLink>
+          <GroupLink href='/sine/prism'>Prism</GroupLink>
+          <GroupLink href='/sine/medusa'>Medusa</GroupLink>
+          <GroupLink href='/sine/perlin'>Perlin</GroupLink>
+          <GroupLink href='/sine/lissajous'>Lissajous</GroupLink>
         </GroupLinks>
       </Group>
 
       <Group>
-        <GroupTitle>Experiments</GroupTitle>
+        <GroupTitle>Audio experiments</GroupTitle>
         <GroupLinks>
-          <GroupLink href='/experiments/audio-source'>Audio visualiser</GroupLink>
-          <GroupLink href='/experiments/oscillator'>Sound oscillator</GroupLink>
+          <GroupLink href='/audio/audio-source'>Audio visualiser</GroupLink>
+          <GroupLink href='/audio/oscillator'>Sound oscillator</GroupLink>
         </GroupLinks>
       </Group>
     </Page>

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Header, Title, Subtitle } from './styles';
-import Link from 'next/link'
+import Link from 'next/link';
 
 interface PageHeaderProps {
   title?: string;
@@ -13,8 +13,12 @@ const PageHeader: FC<PageHeaderProps> = ({ title, subtitle, homeLink }) => {
 
   return (
     <Header>
-      {homeLink && <Link href="/">home</Link>}
-      {title && <Title>{title}</Title>}
+      {title && (
+        <Title>
+          {homeLink && <Link href='/'>⬹</Link>}
+          {title}
+        </Title>
+      )}
       {subtitle && <Subtitle>{subtitle}</Subtitle>}
     </Header>
   );
