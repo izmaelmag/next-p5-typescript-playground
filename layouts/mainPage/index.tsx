@@ -24,6 +24,13 @@ const MainPageLayout = () => {
           <GroupLink href='/audio/oscillator'>Sound oscillator</GroupLink>
         </GroupLinks>
       </Group>
+
+      <Group>
+        <GroupTitle>Noise</GroupTitle>
+        <GroupLinks>
+          <GroupLink href='/noise/grid'>Grid</GroupLink>
+        </GroupLinks>
+      </Group>
     </Page>
   );
 };
