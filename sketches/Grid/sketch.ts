@@ -57,7 +57,10 @@ class LissajousCurveSketch extends P5Sketch<SketchParams> {
 
         let c1: Circle = { r: this.cellSize, c: { x, y } };
 
-        let p1 = Circles.pointAtAngle({ ...c1, r: this.cellSize / 2 }, i + x / 2 - y / 2 + this.dt * 100);
+        let p1 = Circles.pointAtAngle(
+          { ...c1, r: this.cellSize / 2 },
+          i + x / this.params.period - (y / this.params.period) * 2 + this.dt * 100
+        );
 
         let p2 = Circles.pointAtAngle({ c: p1, r: this.cellSize / 4 }, this.dt * -200);
 
