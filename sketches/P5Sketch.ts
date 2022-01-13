@@ -1,26 +1,32 @@
-import p5 from "p5"
+import p5 from 'p5';
 
 export default class P5Sketch<SketchParams> {
-  params: SketchParams
-  p: p5
-  size: number
+  params: SketchParams;
+  p: p5;
+  size: number;
 
   get dt() {
     return this.p.millis() / 1000;
   }
-  
+
   constructor({ defaults }) {
     this.params = {
       ...defaults
-    }
+    };
   }
+
+  onParamsUpdate = (newParams?: SketchParams) => {
+    return;
+  };
 
   setParams = (newParams: SketchParams) => {
     this.params = {
       ...this.params,
       ...newParams
-    }
-  }
+    };
 
-  render: P5SketchFunction
+    this.onParamsUpdate(newParams);
+  };
+
+  render: P5SketchFunction;
 }

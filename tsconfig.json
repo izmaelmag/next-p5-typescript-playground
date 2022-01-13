@@ -32,6 +32,7 @@
   "include": [
     "next-env.d.ts",
     "typings/*.d.ts",
+    "packages/**/*.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "**/*.css"

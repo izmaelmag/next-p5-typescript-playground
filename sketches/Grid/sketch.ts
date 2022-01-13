@@ -1,9 +1,42 @@
 import p5 from 'p5';
 import P5Sketch from 'sketches/P5Sketch';
 import { defaultParams, SketchParams } from './data';
+import { Circles } from '@pp/geo';
 
 class LissajousCurveSketch extends P5Sketch<SketchParams> {
   size = 540;
+  cellSize: number = 0;
+  points: Point[] = [];
+
+  get center(): Point {
+    return {
+      x: this.size / 2,
+      y: this.size / 2
+    };
+  }
+
+  onParamsUpdate = (newParams: SketchParams) => {
+    this.updatePoints();
+  };
+
+  updatePoints = () => {
+    const { gridSize, gap } = this.params;
+
+    this.points = [];
+    this.cellSize = (this.size - (gridSize + 1) * gap) / gridSize;
+
+    let start = gap + this.cellSize / 2;
+    let step = this.cellSize + gap;
+
+    for (let i = 0; i < gridSize; i++) {
+      for (let j = 0; j < gridSize; j++) {
+        this.points.push({
+          x: start + i * step,
+          y: start + j * step
+        });
+      }
+    }
+  };
 
   render = (p: p5) => {
     this.p = p;
@@ -13,36 +46,35 @@ class LissajousCurveSketch extends P5Sketch<SketchParams> {
       p.background(255);
       p.noStroke();
       p.fill(0);
-      p.rectMode(p.CENTER);
     };
 
     p.draw = () => {
       p.background('white');
-
-      const { gridSize, gap } = this.params;
-      const cellSize = (this.size - (gridSize + 1) * gap) / gridSize;
-
       p.rectMode(p.CENTER);
-      for (let i = 0; i < gridSize; i++) {
-        for (let j = 0; j < gridSize; j++) {
-          let x = gap + cellSize / 2 + i * (cellSize + gap);
-          let y = gap + cellSize / 2 + j * (cellSize + gap);
 
-          p.fill('black');
-          p.rect(x, y, cellSize, cellSize);
+      for (let i = 0; i < this.points.length; i++) {
+        const { x, y } = this.points[i];
 
-          p.fill('red');
-          p.circle(x, y, 4);
-        }
+        let c1: Circle = { r: this.cellSize, c: { x, y } };
+
+        let p1 = Circles.pointAtAngle({ ...c1, r: this.cellSize / 2 }, i + x / 2 - y / 2 + this.dt * 100);
+
+        let p2 = Circles.pointAtAngle({ c: p1, r: this.cellSize / 4 }, this.dt * -200);
+
+        let p3 = Circles.pointAtAngle({ c: p2, r: this.cellSize / 8 }, this.dt * 400);
+
+        p.fill('black');
+        p.circle(c1.c.x, c1.c.y, c1.r);
+
+        p.fill('white');
+        p.circle(p1.x, p1.y, this.cellSize / 2);
+
+        p.fill('black');
+        p.circle(p2.x, p2.y, this.cellSize / 4);
+
+        p.fill('white');
+        p.circle(p3.x, p3.y, this.cellSize / 8);
       }
-
-      p.rectMode(p.CORNER);
-      p.fill('rgba(0, 255, 0, 0.33)');
-
-      p.rect(0, 0, gap, this.size);
-      p.rect(0, 0, this.size, gap);
-      p.rect(0, this.size - gap, this.size, gap);
-      p.rect(this.size - gap, 0, gap, this.size);
     };
   };
 }
