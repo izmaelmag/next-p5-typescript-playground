@@ -1,0 +1,31 @@
+import p5 from 'p5';
+import P5Sketch from 'sketches/P5Sketch';
+import { defaultParams, SketchParams } from './data';
+
+class {{pascalCase name}}Sketch extends P5Sketch<SketchParams> {
+  size = 640;
+
+  checkSize = () => {
+    if (typeof window !== undefined) {
+      const minSize = Math.min(window.innerWidth, window.innerHeight);
+      if (minSize < this.size) {
+        this.size = minSize - 20;
+      }
+    }
+  };
+
+  render = (p: p5) => {
+    this.p = p;
+
+    p.setup = () => {
+      this.checkSize()
+      p.createCanvas(this.size, this.size);
+    };
+
+    p.draw = () => {
+      p.circle(this.center, this.center, 75 + 25 * p.sin(this.dt));
+    };
+  };
+}
+
+export const sketch = new {{pascalCase name}}Sketch({ defaults: defaultParams });

@@ -8,13 +8,6 @@ class LissajousCurveSketch extends P5Sketch<SketchParams> {
   cellSize: number = 0;
   points: Point[] = [];
 
-  get center(): Point {
-    return {
-      x: this.size / 2,
-      y: this.size / 2
-    };
-  }
-
   onParamsUpdate = (newParams: SketchParams) => {
     this.updatePoints();
   };
@@ -57,8 +50,8 @@ class LissajousCurveSketch extends P5Sketch<SketchParams> {
 
         let c1: Circle = { r: this.cellSize, c: { x, y } };
 
-        let dx = this.center.x - x;
-        let dy = this.center.y - y;
+        let dx = this.center - x;
+        let dy = this.center - y;
         let distance = Math.sqrt(dx * dx + dy * dy);
         let phase = Math.abs(distance);
 
@@ -82,6 +75,4 @@ class LissajousCurveSketch extends P5Sketch<SketchParams> {
   };
 }
 
-const sketch = new LissajousCurveSketch({ defaults: defaultParams });
-
-export default sketch;
+export const sketch = new LissajousCurveSketch({ defaults: defaultParams });

@@ -1,3 +1,3 @@
-import MainPageLayout from 'layouts/mainPage'
-const MainPage = () => <MainPageLayout />;
-export default MainPage
+import HomeView from 'Views/Home';
+const MainPage = () => <HomeView />;
+export default MainPage;

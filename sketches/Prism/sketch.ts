@@ -4,7 +4,7 @@ import sine from 'utils/sine';
 import { defaultParams, SketchParams } from './data';
 
 class PrismSketch extends P5Sketch<SketchParams> {
-  size = 480;
+  size = 640;
 
   private start: Point = { x: 0, y: this.size };
   private end: Point = { x: this.size, y: this.size };
@@ -60,7 +60,11 @@ class PrismSketch extends P5Sketch<SketchParams> {
     };
 
     p.draw = () => {
-      p.background(`rgba(${this.params.background}, ${this.params.background}, ${this.params.background}, ${1 - this.params.fadeOut})`);
+      p.background(
+        `rgba(${this.params.background}, ${this.params.background}, ${this.params.background}, ${
+          1 - this.params.fadeOut
+        })`
+      );
 
       let updatedPoints = this.updatePoints(this.getPoints(this.params.pointsCount));
 
@@ -82,6 +86,4 @@ class PrismSketch extends P5Sketch<SketchParams> {
   };
 }
 
-const sketch = new PrismSketch({ defaults: defaultParams });
-
-export default sketch;
+export const sketch = new PrismSketch({ defaults: defaultParams });

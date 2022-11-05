@@ -9,6 +9,10 @@ export default class P5Sketch<SketchParams> {
     return this.p.millis() / 1000;
   }
 
+  get center() {
+    return this.size / 2;
+  }
+
   constructor({ defaults }) {
     this.params = {
       ...defaults
